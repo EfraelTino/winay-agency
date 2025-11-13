@@ -1,0 +1,60 @@
+---
+const clients =[
+    {id: 1, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 2, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 3, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 4, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 5, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 6, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 7, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 8, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 8, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 8, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 8, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+    {id: 8, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", name:"Av. Wilson Peru"},
+]
+---
+
+<footer>
+    <section class="grid grid-cols-12 py-4 bg-[#f5f6f7] gap-3 justify-center">
+        {
+          clients.map(item =>(
+            <div class="flex justify-center">
+                <img class="max-w-4/6" src={item.logo} alt="" />
+            </div>
+          ))
+        }
+    </section>
+    <section class="bg-footer bg-center bg-cover bg-no-repeat py-20">
+       <div class="max-w-6xl mx-auto ">
+         <div class="grid grid-cols-3">
+            <div class="col-span-1 space-y-4">
+                <h4 class="text-white font-bold text-2xl">OFICINA</h4>
+                <ul>
+                    <li><a class="text-white text-base" href="">(+51) 936554698</a></li>
+                    <li><a class="text-white text-base" href="">Albaricoques 231 - La Molina</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1 space-y-4">
+                <h4 class="text-white font-bold text-2xl">ESCRÌBENOS</h4>
+                <ul>
+                    <li><a href="" class="text-white text-base">comercial@winayagency.com</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1 space-y-4">
+                <h4 class="text-white font-bold text-2xl">SÍGUENOS</h4>
+                <ul>
+                    <li><a class="text-white text-base" href="">Albaricoques 231 - La Molina</a></li>
+                    <li><a class="text-white text-base" href="">(+51) 936554698</a></li>
+                </ul>
+            </div>
+        </div>
+       </div>
+    </section>
+</footer>
+
+<style>
+    .bg-footer{
+        background-image: url('https://winayagency.com/wp-content/uploads/2023/06/2_11zon.jpg');
+    }
+</style>

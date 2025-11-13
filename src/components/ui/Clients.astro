@@ -1,0 +1,82 @@
+---
+const sources = [
+    {
+        id: 1,
+        title: "NOMBRE DE MARCA",
+        source: "https://www.youtube.com/embed/IBWw0iPlzC4?si=RaMeRjuGSYu96ey_",
+    },
+    {
+        id: 1,
+        title: "NOMBRE DE MARCA",
+        source: "https://www.youtube.com/embed/IBWw0iPlzC4?si=RaMeRjuGSYu96ey_",
+    },
+    {
+        id: 1,
+        title: "NOMBRE DE MARCA",
+        source: "https://www.youtube.com/embed/IBWw0iPlzC4?si=RaMeRjuGSYu96ey_",
+    },
+    {
+        id: 1,
+        title: "NOMBRE DE MARCA",
+        source: "https://www.youtube.com/embed/IBWw0iPlzC4?si=RaMeRjuGSYu96ey_",
+    },
+    {
+        id: 1,
+        title: "NOMBRE DE MARCA",
+        source: "https://www.youtube.com/embed/IBWw0iPlzC4?si=RaMeRjuGSYu96ey_",
+    },
+    {
+        id: 1,
+        title: "NOMBRE DE MARCA",
+        source: "https://www.youtube.com/embed/IBWw0iPlzC4?si=RaMeRjuGSYu96ey_",
+    },
+];
+---
+
+<section class="max-w-6xl mx-auto py-12">
+    <h2 class="font-bold text-center text-3xl mb-5">
+        CLIENTES QUE <span class="text-winay italic">
+            MULTIPLICARON SUS INGRESOS</span
+        >
+    </h2>
+    <div class="grid grid-cols-2 gap-6">
+        {
+            sources.map((key) => (
+                <div class="space-y-3 text-center gap-0 col-span-1">
+                    <h3 class="text-xl">{key.title}</h3>
+                    <iframe
+                        width="560"
+                        height="315"
+                        src={key.source}
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                        class="rounded-2xl shadow-lg"
+                    />
+                </div>
+            ))
+        }
+    </div>
+</section>
+<section class="max-w-6xl mx-auto py-12">
+    <div class="bg-cta bg-cover bg-center bg-no-repeat rounded-2xl py-16 px-64 space-y-6">
+        <h2 class="font-bold text-center text-3xl mb-5 text-white">
+            Haz que tu marca<span class="text-black italic">
+                marque la diferencia</span
+            >
+        </h2>
+        <p class="text-white text-center">Cuéntanos cómo podemos impulsar tu crecimiento. Contamos con una metodología eficaz  y casos de éxito comprobados.</p>
+        <div class="flex justify-center">
+            <button class="bg-green-600 py-2.5 rounded-lg font-extrabold italic cursor-pointer px-10 shadow-lg text-white uppercase">
+            Agenda una reunión
+        </button>
+        </div>
+    </div>
+</section>
+<style>
+    .bg-cta {
+        background-image: url("https://winayagency.com/wp-content/uploads/2023/06/winay8.jpg");
+    }
+</style>
