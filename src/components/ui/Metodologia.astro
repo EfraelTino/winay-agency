@@ -1,0 +1,166 @@
+---
+const steps = [
+  {
+    num: 1,
+    title: 'Diagnóstico <br> Estratégico',
+    desc: "Analizamos tu marca, tu oferta y tu competencia para identificar tus oportunidades reales de crecimiento."
+  },
+  {
+    num: 2,
+    title: "Plan Publicitario a Medida",
+    desc: "Definimos audiencias, mensajes y creatividades para construir un plan de marketing realmente rentable."
+  },
+  {
+    num: 3,
+    title: "Ejecución + Optimización",
+    desc: "Implementamos campañas con ajustes constantes para reducir costos y aumentar conversiones."
+  },
+  {
+    num: 4,
+    title: "Escalamiento Controlado",
+    desc: "Impulsamos tu crecimiento de forma rentable y sostenible, sin perder control de tu inversión."
+  }
+];
+---
+
+<section class="max-w-6xl mx-auto py-14 px-6 md:px-12">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 md:mb-12">
+    <span class="text-black">Nuestra Metodología <strong class="font-black italic text-winay">Wiñay</strong></span>
+  </h2>
+
+  <div id="winay-container" class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+
+    {steps.map((step, index) => (
+      <div
+        class="relative flex flex-col gap-2 px-4 py-6 rounded-2xl bg-white shadow-md card-winay"
+        data-index={index}
+      >
+
+        <!-- SVG BORDER -->
+        <svg class="border-svg absolute inset-0 w-full h-full pointer-events-none">
+          <rect
+            x="4"
+            y="4"
+            width="calc(100% - 8px)"
+            height="calc(100% - 8px)"
+            rx="18"
+            ry="18"
+          />
+        </svg>
+
+        <span class="text-winay font-black text-3xl">{step.num}</span>
+   <h3 class="font-semibold text-lg" set:html={step.title}></h3>
+
+        <p class="text-gray-600 leading-snug text-sm" set:html={step.desc} />
+      </div>
+    ))}
+
+    <!-- FLECHA -->
+    <div id="arrow" class="arrow-winay"></div>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-3  gap-2 md:gap-6 mt-16 max-w-2xl mx-auto">
+    <div class="border-2 border-slate-200  rounded-2xl p-4">
+      <p class="text-3xl font-black text-winay">+300%</p>
+      <p class="text-xs text-gray-600">Incremento promedio de leads</p>
+    </div>
+
+        <div class="border-2 border-slate-200  rounded-2xl p-4">
+      <p class="text-3xl font-black text-winay">-45%</p>
+      <p class="text-xs text-gray-600">Reducción de costo por lead</p>
+    </div>
+
+    <div class="border-2 border-slate-200  rounded-2xl p-4">
+      <p class="text-3xl font-black text-winay">98%</p>
+      <p class="text-xs text-gray-600">Clientes renovando mes a mes</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .text-winay {
+    color: #ff1c69;
+  }
+
+  .card-winay {
+    position: relative;
+  }
+
+  /* ---- SVG STROKE (Invisible at start) ---- */
+  .border-svg rect {
+    stroke: transparent;        /* no borde al inicio */
+    stroke-width: 3px;
+    fill: transparent;
+
+    stroke-dasharray: 600;      /* longitud del borde */
+    stroke-dashoffset: 600;     /* inicio oculto */
+    transition: stroke-dashoffset 1.2s ease;
+  }
+
+  /* ---- FLECHA ---- */
+  .arrow-winay {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+
+    border-left: 16px solid #ff1c69;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+
+    transition: transform 0.5s ease, opacity 0.4s ease;
+    z-index: 20;
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll(".card-winay");
+  const arrow = document.getElementById("arrow");
+
+  async function animateStep(index) {
+    const card = cards[index];
+    const rect = card.querySelector("rect");
+
+    // ACTIVAR COLOR DEL BORDE AHORA
+    rect.style.stroke = "#ff1c69";
+
+    // DIBUJAR BORDE
+    rect.style.strokeDashoffset = "0";
+
+    // esperar que termine el trazo
+    await new Promise(res => setTimeout(res, 1200));
+
+    // si es la última card → termina
+    if (index === cards.length - 1) return;
+
+    // posiciones
+    const current = card.getBoundingClientRect();
+    const next = cards[index + 1].getBoundingClientRect();
+
+    // POSICIONAR FLECHA EN BORDE DERECHO DEL CARD ACTUAL
+    const containerRect = document
+      .getElementById("winay-container")
+      .getBoundingClientRect();
+
+    arrow.style.top = `${current.top - containerRect.top + current.height / 2}px`;
+    arrow.style.left = `${current.right - containerRect.left + -40}px`;
+    arrow.style.opacity = "1";
+
+    // ANIMAR VIAJE HACIA LA SIGUIENTE CARD
+    arrow.style.transform = `
+      translateX(${next.left - current.right + 20}px)
+      translateY(${next.top - current.top}px)
+    `;
+
+    await new Promise(res => setTimeout(res, 600));
+
+    // ocultar flecha antes de dibujar el siguiente
+    arrow.style.opacity = "0";
+
+    animateStep(index + 1);
+  }
+
+  // Iniciar animación con un pequeño delay
+  setTimeout(() => animateStep(0), 400);
+</script>

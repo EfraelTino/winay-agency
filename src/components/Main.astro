@@ -1,96 +1,70 @@
 ---
 import Header from "./Header.astro";
 import Clients from "./ui/Clients.astro";
+import Cal from "./Cal.astro";
+import Metodologia from './ui/Metodologia.astro';
 ---
 
 <main>
     <div class="min-h-screen bg-principal bg-no-repeat bg-center bg-cover">
         <Header />
         <div class="max-w-6xl mx-auto flex items-center">
-            <div>
-                <h1 class="text-center font-black text-5xl mx-8 text-white pt-8 pb-5">
-                   Impulsa tu negocio tu negocio con Estrategias Digitales que Multiplican tu Ventas
+            <div class="mb-8">
+                <h1
+                    class="text-center font-black text-2xl mx-2 md:text-5xl md:mx-24 text-white pt-4 pb-5"
+                >
+                    Impulsa tu negocio tu negocio con Estrategias Digitales que
+                    Multiplican tu Ventas
                 </h1>
-                <p class="text-white text-xl text-center pb-8">
+                <p class="text-white text-sm md:text-xl text-center pb-8 px-16">
                     Estrategias efectivas, resultados visibles. Nuestra agencia
                     convierte tu inversión en crecimiento tangible
                 </p>
-                <div class="grid grid-cols-2 gap-20">
-                    <div class="col-span-1 flex items-end">
-                        <img
-                            src="https://winayagency.com/wp-content/uploads/2023/12/como-aumentar-mis-ventas-tip-1.webp"
-                            alt=""
-                        />
-                    </div>
-                    <div class="col-span-1">
-                        <div class="rounded-2xl bg-black p-12 px-10">
-                            <h2
-                                class="text-winay text-center uppercase text-3xl font-black"
+                <div class="flex justify-center items-center">
+                    <iframe
+                        class="h-50 w-76 md:h-94 md:w-150 rounded-lg shadow-lg"
+                        width="100%"
+                        height="100%"
+                        src="https://player-vz-76d1a0c0-cfe.tv.pandavideo.com/embed/?v=bce4ae91-5899-4b06-93c7-17a8fb29641d"
+                        frameborder="0"></iframe>
+                </div>
+                <div class="flex justify-center mt-4 md:mt-6">
+                    <a
+                    href="#cal"
+                        class="inline-flex flex-col items-center
+                                bg-gradient-to-b from-green-500 via-green-600 to-green-700
+                                hover:from-green-600 hover:via-green-700 hover:to-green-600
+                                text-white text-md md:text-2xl font-semibold py-4 px-4 md:px-10 rounded-full
+                                cursor-pointer transition-all duration-300 uppercase shadow-xl
+                                hover:shadow-2xl transform gap-1"
+                    >
+                        <span class="flex items-center gap-2">
+                            <svg
+                                class="w-7 h-7"
+                                fill="none"
+                                stroke="white"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
                             >
-                                <span class="text-white italic"
-                                    >Impulsa tus ventas</span
-                                > y domina tu mercado.
-                            </h2>
-                            <form action="">
-                                <div
-                                    class="grid grid-cols-2 mt-8 space-x-4 gap-4"
-                                >
-                                    <div class="col-span-2 w-full">
-                                        <input
-                                            type="text"
-                                            class="bg-white text-gray-900 placeholder:text-gray-400 rounded-lg w-full pr-7 pl-3 py-2.5 focus:outline-0 focus:-outline-offset-0"
-                                            placeholder="Nombre"
-                                        />
-                                    </div>
-                                    <div class="col-span-1 w-full">
-                                        <input
-                                            type="text"
-                                            class="bg-white text-gray-900 placeholder:text-gray-400 rounded-lg w-full pr-7 pl-3 py-2.5 focus:outline-0 focus:-outline-offset-0"
-                                            placeholder="Teléfono"
-                                        />
-                                    </div>
-                                    <div class="col-span-1 w-full">
-                                        <input
-                                            type="text"
-                                            class="bg-white text-gray-900 placeholder:text-gray-400 rounded-lg w-full pr-7 pl-3 py-2.5 focus:outline-0 focus:-outline-offset-0"
-                                            placeholder="Correo"
-                                        />
-                                    </div>
-                                    <div class="col-span-2 w-full">
-                                        <select
-                                            class="bg-white text-gray-400 rounded-lg w-full pr-7 pl-3 py-2.5 focus:outline-0 focus:-outline-offset-0"
-                                            name="0"
-                                            id=""
-                                        >
-                                            <option value="" class="rounded"
-                                                >Rubro de tu empresa</option
-                                            >
-                                        </select>
-                                    </div>
-                                    <div class="col-span-2 w-full">
-                                        <textarea
-                                            name=""
-                                            class="bg-white text-gray-900 placeholder:text-gray-400 rounded-lg w-full pr-7 pl-3 py-2.5 focus:outline-0 focus:-outline-offset-0"
-                                            placeholder="Problema actual y necesidades"
-                                            id=""></textarea>
-                                    </div>
-                                    <div
-                                        class="col-span-2 flex justify-center items-center"
-                                    >
-                                        <button
-                                            type="submit"
-                                            class="bg-winay py-2.5 rounded-lg font-extrabold italic cursor-pointer w-full text-white uppercase"
-                                            >Enviar Requerimiento</button
-                                        >
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 12h14M13 6l6 6-6 6"></path>
+                            </svg>
+
+                            QUIERO AUMENTAR MIS VENTAS
+                        </span>
+
+                        <span class="text-xs tracking-widest opacity-90"
+                            >CLIC PARA AGENDAR</span
+                        >
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    <Metodologia />
+    <Cal />
     <Clients />
 </main>
 

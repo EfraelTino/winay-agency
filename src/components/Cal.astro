@@ -1,0 +1,83 @@
+<section
+    class="min-h-screen bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900"
+    id="cal"
+>
+    <div class="container max-w-4xl mx-auto px-4 py-8 md:py-16">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h1
+                    class="text-xl md:text-2xl md:text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight tracking-tight"
+                >
+                    Solo después de ver el video completo, agenda una reunión
+                    con nuestro equipo de
+                    <span class="text-winay italic underline font-extrabold">
+                        Wiñay Agency
+                    </span>, descubre cómo podemos multiplicar tus ventas con
+                    una estrategia digital diseñada específicamente para tu
+                    negocio.👇🏼
+                </h1>
+            </div>
+            <div
+                style="width:100%;height:100%;overflow:scroll"
+                id="my-cal-inline-30min"
+            >
+            </div>
+            <div>
+                <p class="text-center text-white text-sm md:text-lg mt-4">
+                    <strong class="font-bold text-white italic underline">El problema no es tu presupuesto</strong> Es la estrategia detrás.
+                    Muchas empresas invierten todos los meses en anuncios, pero
+                    <strong class="font-bold text-white italic underline"> sin segmentar, sin propuesta clara y sin medición real.</strong>
+                    Resultado: clics caros y leads que no convierten. <strong class="text-white font-bold italic underline">Nosotros
+                    ayudamos a corregir eso.</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    (function (C, A, L) {
+        let p = function (a, ar) {
+            a.q.push(ar);
+        };
+        let d = C.document;
+        C.Cal =
+            C.Cal ||
+            function () {
+                let cal = C.Cal;
+                let ar = arguments;
+                if (!cal.loaded) {
+                    cal.ns = {};
+                    cal.q = cal.q || [];
+                    d.head.appendChild(d.createElement("script")).src = A;
+                    cal.loaded = true;
+                }
+                if (ar[0] === L) {
+                    const api = function () {
+                        p(api, arguments);
+                    };
+                    const namespace = ar[1];
+                    api.q = api.q || [];
+                    if (typeof namespace === "string") {
+                        cal.ns[namespace] = cal.ns[namespace] || api;
+                        p(cal.ns[namespace], ar);
+                        p(cal, ["initNamespace", namespace]);
+                    } else p(cal, ar);
+                    return;
+                }
+                p(cal, ar);
+            };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "30min", { origin: "https://app.cal.com" });
+
+    Cal.ns["30min"]("inline", {
+        elementOrSelector: "#my-cal-inline-30min",
+        config: { layout: "month_view" },
+        calLink: "winay-agency/30min",
+    });
+
+    Cal.ns["30min"]("ui", {
+        hideEventTypeDetails: false,
+        layout: "month_view",
+    });
+</script>
+<!-- Cal inline embed code ends -->
