@@ -1,37 +1,132 @@
-<footer
-    class="mx-auto bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900"
->
-    <div
-        class="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-2 md:gap-10 text-gray-300 py-5 rounded-4xl"
-    >
-        <p class="text-sm text-center">
-            <a
-                href="tel:51936554698"
-                class="text-white hover:text-white/80"
-                target="_blank">(+51) 936554698</a
-            >
-        </p>
-        <p class="text-sm text-center">
-            <a
-                href="https://maps.app.goo.gl/Tk8A5LJLXvGG73K38"
-                class="text-white hover:text-white/80"
-                target="_blank">Albaricoques 231 - La Molina</a
-            >
-        </p>
-        <p class="text-sm text-center">
-            <a
-                href="mailto:comercial@winayagency.com"
-                target="_blank"
-                class="text-white hover:text-white/80"
-                >comercial@winayagency.com</a
-            >
-        </p>
-        <p class="text-sm text-center text-white">20614057093</p>
-    </div>
-</footer>
+---
+import { Image } from "astro:assets";
+/* Asegúrate de poner la ruta correcta de tu logo aquí */
+// import logoImage from '../assets/logo-winay.png';
+---
 
-<style>
-    .bg-footer {
-        background-image: url("https://winayagency.com/wp-content/uploads/2023/06/2_11zon.jpg");
-    }
-</style>
+<footer class="bg-black border-t border-white/10 pt-12 pb-4">
+  <div class="max-w-[1600px] mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-10">
+      <div class="col-span-1 md:col-span-1 flex flex-col items-start gap-4">
+        <div class="h-24">
+          <Image
+            width={327}
+            height={311}
+            src="/assets/winay.png"
+            alt="Wiñay Agency"
+            loading="lazy"
+            class="h-full object-contain"
+          />
+        </div>
+        <p class="text-gray-300 text-sm leading-relaxed mt-2">
+          Ayudamos a marcas a escalar sus resultados a través de estrategias
+          digitales de alto impacto.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-2">
+          Contacto
+        </h4>
+
+        <a
+          href="tel:51936554698"
+          class="flex items-center gap-3 text-gray-300 hover:text-[#e6007e] transition-colors group"
+        >
+          <div
+            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#e6007e]/20 transition-colors"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              ></path></svg
+            >
+          </div>
+          <span class="text-sm">(+51) 936 554 698</span>
+        </a>
+
+        <a
+          href="mailto:comercial@winayagency.com"
+          class="flex items-center gap-3 text-gray-300 hover:text-[#e6007e] transition-colors group"
+        >
+          <div
+            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#e6007e]/20 transition-colors"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              ></path></svg
+            >
+          </div>
+          <span class="text-sm">comercial@winayagency.com</span>
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-2">
+          Ubicación
+        </h4>
+        <a
+          href="https://goo.gl/maps/..."
+          target="_blank"
+          class="flex items-start gap-3 text-gray-300 hover:text-[#e6007e] transition-colors group"
+        >
+          <div
+            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#e6007e]/20 transition-colors shrink-0"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              ></path><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
+            >
+          </div>
+          <span class="text-sm leading-snug"
+            >Albaricoques 231<br />La Molina, Lima - Perú</span
+          >
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h4 class="text-white font-bold uppercase tracking-wider text-sm mb-2">
+          Datos Fiscales
+        </h4>
+        <p class="text-gray-300 text-sm flex items-center gap-2">
+          <span class="text-[#e6007e] font-bold">RUC:</span> 20614057093
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-white/20 pt-4 flex items-center justify-center gap-4"
+    >
+      <p class="text-gray-200 text-xs">
+        © {new Date().getFullYear()} Wiñay Agency. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

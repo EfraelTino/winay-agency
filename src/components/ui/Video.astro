@@ -1,0 +1,82 @@
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+
+<div class="video-container w-full flex justify-center items-center">
+  <CldVideoPlayer
+    id="video-player-home"
+    src="video-home"
+    width="1920"
+    height="1080"
+    client:visible 
+    fluid={true}
+    colors={{
+      accent: '#e6007e', // Tu color de marca
+      base: '#000000',   
+      text: '#ffffff'    
+    }}
+    transformation={{
+      quality: 'auto',
+      fetch_format: 'auto'
+    }}
+    posterOptions={{
+      transformation: { start_offset: 109 }
+    }}
+    logo={{
+      imageUrl: 'https://tu-dominio.com/logo-pequeno.png',
+      onClickUrl: 'https://tu-dominio.com'
+    }}
+  />
+</div>
+
+<style is:global>
+  .video-container {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    background-color: #000;
+  }
+
+  .cld-video-player .vjs-big-play-button {
+    background-color: rgba(0, 0, 0, 1) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 80px !important;
+    height: 80px !important;
+    
+    top: 50% !important;
+    left: 50% !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    
+    transition: all 0.3s ease;
+    line-height: 80px !important;
+  }
+
+  .cld-video-player .vjs-big-play-button .vjs-icon-placeholder:before {
+    color: #ffffff; 
+  }
+
+  .cld-video-player .vjs-big-play-button:hover {
+    background-color: #000000 !important;
+    transition: all;
+    transform: translate(-50%, -50%) scale(1.05) !important;
+  }
+
+  .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button {
+    display: block !important; /* Forzamos que aparezca de nuevo */
+    background-color: rgba(255, 255, 255,1) !important; /* Fondo Blanco */
+  }
+
+  .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button .vjs-icon-placeholder:before {
+    color: #000000; 
+  }
+
+  .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button:hover {
+    background-color: #ffffff !important;
+    transform: translate(-50%, -50%) scale(1.05) !important;
+    box-shadow: 0 0 20px rgba(0,0,0,1);
+  }
+</style>
