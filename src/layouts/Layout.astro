@@ -2,28 +2,25 @@
 import "@fontsource-variable/mona-sans";
 import { SEO } from "astro-seo";
 
+// 1. SIMPLIFICACIÓN: Ya no pedimos 'title' aquí.
 interface Props {
-  title: string;
   description?: string;
   image?: string;
   noIndex?: boolean;
 }
 
 const { 
-  title, 
   description = "Wiñay Agency: Multiplica tus ventas con estrategias digitales de alto rendimiento. Expertos en publicidad segmentada y conversión de leads.",
-  image = "/favicon.webp",
+  image = "/favicon.webp", 
   noIndex = false,
 } = Astro.props;
 
-const siteURL = "https://winayagency.com";
+// 2. CORRECCIÓN SEO: 
+// Marca + Palabra Clave Principal + Ubicación
+const siteTitle = "Wiñay Agency | Agencia de Marketing Digital en Lima";
 
-// --- FIX DEL ERROR ---
-// Creamos variables auxiliares SOLO para pasarlas al componente SEO.
-// Si 'title' viene vacío, usamos el nombre de la agencia para que no explote.
-const seoTitle = title || "Wiñay Agency";
+const siteURL = "https://winayagency.com";
 const seoImage = new URL(image, siteURL).href;
-// --------------------
 ---
 
 <!doctype html>
@@ -35,23 +32,29 @@ const seoImage = new URL(image, siteURL).href;
     <meta name="generator" content={Astro.generator} />
 
     <SEO
-      title={seoTitle}
-      titleTemplate="%s | Wiñay Agency"
+      title={siteTitle}
+      titleTemplate={null} 
       description={description}
       noindex={noIndex}
       openGraph={{
         basic: {
-          title: seoTitle,   
+          title: siteTitle,   
           type: "website",
           image: seoImage,
         },
         image: {
-            alt: "Wiñay Agency - Estrategia Digital"
+            alt: "Wiñay Agency - Agencia de Marketing Digital en Lima",
         }
       }}
       twitter={{
         card: "summary_large_image",
-        creator: "@winayagency"
+        creator: "@winayagency",
+        image: seoImage,
+      }}
+      extend={{
+        meta: [
+          { property: "og:image:secure_url", content: seoImage },
+        ],
       }}
     />
 
@@ -63,13 +66,22 @@ const seoImage = new URL(image, siteURL).href;
         "url": "https://winayagency.com",
         "logo": "https://winayagency.com/favicon.webp",
         "image": "https://winayagency.com/favicon.webp",
-        "description": "Agencia de marketing digital experta en embudos de venta y publicidad segmentada en Lima.",
+        "description": "Agencia de marketing digital en Lima experta en embudos de venta y publicidad segmentada.",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Lima",
           "addressCountry": "PE"
         },
-        "priceRange": "S/"
+        "priceRange": "S/",
+        "knowsAbout": [
+          "Marketing Digital",
+          "Agencia de Marketing",
+          "Publicidad en Redes Sociales",
+          "Facebook Ads",
+          "Google Ads",
+          "Embudos de Venta"
+        ],
+        "areaServed": "Lima, Peru"
       }
     </script>
 
@@ -82,13 +94,11 @@ const seoImage = new URL(image, siteURL).href;
 </html>
 
 <style is:global>
-  /* Fuente Global */
   html {
     font-family: "Mona Sans Variable", sans-serif;
-font-display: swap;
+    font-display: swap;
   }
 
-  /* Scroll suave solo si el usuario no tiene activada la reducción de movimiento */
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
