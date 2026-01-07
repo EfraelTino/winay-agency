@@ -1,82 +1,140 @@
 ---
-import { CldVideoPlayer } from 'astro-cloudinary';
+import { CldVideoPlayer } from "astro-cloudinary";
 ---
 
-<div class="video-container w-full flex justify-center items-center">
-  <CldVideoPlayer
-    id="video-player-home"
-    src="video-home"
-    width="1920"
-    height="1080"
-    client:visible 
-    fluid={true}
-    colors={{
-      accent: '#e6007e', // Tu color de marca
-      base: '#000000',   
-      text: '#ffffff'    
-    }}
-    transformation={{
-      quality: 'auto',
-      fetch_format: 'auto'
-    }}
-    posterOptions={{
-      transformation: { start_offset: 109 }
-    }}
-    logo={{
-      imageUrl: 'https://tu-dominio.com/logo-pequeno.png',
-      onClickUrl: 'https://tu-dominio.com'
-    }}
-  />
+<div
+  class="video-container w-full flex justify-center items-center relative group aspect-video"
+>
+  <div
+    class="absolute -inset-1 bg-gradient-to-r from-[#e6007e] to-white rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"
+  >
+  </div>
+
+  <div
+    class="relative w-full h-full rounded-xl overflow-hidden border border-white/10 bg-neutral-900"
+  >
+    <CldVideoPlayer
+      id="video-player-home"
+      src="video-home"
+      width="1920"
+      height="1080"
+      fluid={true}
+      colors={{
+        accent: "#e6007e",
+        base: "#000000",
+        text: "#ffffff",
+      }}
+      transformation={{
+        quality: "auto",
+        fetch_format: "auto",
+      }}
+      posterOptions={{
+        publicId: 'winay-portada_h2syo9'
+      }}
+      logo={{
+        imageUrl: "/assets/winay.webp",
+        onClickUrl: "/",
+      }}
+    />
+  </div>
 </div>
 
 <style is:global>
   .video-container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    background-color: #000;
   }
 
+  /* --- ESTILOS DEL BOTÓN DE PLAY (OPTIMIZADOS) --- */
+  
+  /* 1. Estado Normal (Inicial) */
   .cld-video-player .vjs-big-play-button {
-    background-color: rgba(0, 0, 0, 1) !important;
+    background-color: #e6007e !important;
     border: none !important;
     border-radius: 50% !important;
     width: 80px !important;
     height: 80px !important;
     
+    /* Centrado absoluto */
     top: 50% !important;
     left: 50% !important;
     margin: 0 !important;
     transform: translate(-50%, -50%) !important;
+
+    /* ANIMACIÓN OPTIMIZADA (GPU) */
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease !important;
+    opacity: 1 !important; /* Siempre visible al inicio */
+    visibility: visible !important;
     
-    transition: all 0.3s ease;
     line-height: 80px !important;
+    backdrop-filter: blur(4px);
   }
 
+  /* Icono del Play */
   .cld-video-player .vjs-big-play-button .vjs-icon-placeholder:before {
-    color: #ffffff; 
+    color: #ffffff;
+    font-size: 50px;
+    line-height: 80px;
   }
 
+  /* Hover Inicial */
   .cld-video-player .vjs-big-play-button:hover {
-    background-color: #000000 !important;
-    transition: all;
-    transform: translate(-50%, -50%) scale(1.05) !important;
+    background-color: #ff1a94 !important;
+    transform: translate(-50%, -50%) scale(1.05) !important; /* Pequeño zoom */
+    box-shadow: 0 0 30px rgba(230, 0, 126, 1) !important;
   }
 
+  /* --- CORRECCIÓN LIGHTHOUSE --- */
+  
+  /* 2. Cuando el video está REPRODUCIENDO (Ocultar suavemente) */
+  .cld-video-player.vjs-has-started.vjs-playing .vjs-big-play-button {
+    opacity: 0 !important; /* Transparente */
+    pointer-events: none !important; /* No clickeable */
+    visibility: visible !important; /* Mantener en DOM para no cortar animación */
+    display: block !important;
+  }
+
+  /* 3. Cuando el video está PAUSADO (Mostrar botón blanco) */
   .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button {
-    display: block !important; /* Forzamos que aparezca de nuevo */
-    background-color: rgba(255, 255, 255,1) !important; /* Fondo Blanco */
-  }
-
-  .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button .vjs-icon-placeholder:before {
-    color: #000000; 
-  }
-
-  .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button:hover {
+    opacity: 1 !important;
+    pointer-events: auto !important;
     background-color: #ffffff !important;
+    display: block !important;
+  }
+
+  /* Icono rosa cuando está pausado */
+  .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button .vjs-icon-placeholder:before {
+    color: #e6007e;
+  }
+
+  /* Hover cuando está pausado */
+  .cld-video-player.vjs-has-started.vjs-paused .vjs-big-play-button:hover {
     transform: translate(-50%, -50%) scale(1.05) !important;
-    box-shadow: 0 0 20px rgba(0,0,0,1);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4) !important;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    .cld-video-player .vjs-big-play-button {
+      width: 60px !important;
+      height: 60px !important;
+      line-height: 60px !important;
+    }
+    .cld-video-player .vjs-big-play-button .vjs-icon-placeholder:before {
+      font-size: 35px;
+      line-height: 60px;
+    }
+  }
+
+  /* --- BARRA DE PROGRESO --- */
+  /* Desactivar clics en la barra de progreso (Solo ver, no adelantar) */
+  .cld-video-player .vjs-progress-control {
+    pointer-events: none !important;
+    cursor: default !important;
+  }
+
+  /* Ocultar la bolita (handle) */
+  .cld-video-player .vjs-play-progress:before {
+    display: none !important;
   }
 </style>

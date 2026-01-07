@@ -1,83 +1,205 @@
+---
+const checklistItems = [
+  { text: "Tu marca ya invierte o está lista para invertir en publicidad" },
+  { text: "Buscas leads o ventas reales, no solo “presencia”" },
+  { text: "Eres parte de la toma de decisiones del negocio" },
+];
+---
+
 <section
-    class="min-h-screen bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900"
-    id="cal"
+  class="min-h-screen bg-gradient-to-b from-neutral-900 via-neutral-800 to-neutral-900"
+  id="cal"
 >
-    <div class="container max-w-4xl mx-auto px-4 py-8 md:py-16">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h1
-                    class="text-xl md:text-2xl md:text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight tracking-tight"
-                >
-                    Solo después de ver el video completo, agenda una reunión
-                    con nuestro equipo de
-                    <span class="text-winay italic underline font-extrabold">
-                        Wiñay Agency
-                    </span>, descubre cómo podemos multiplicar tus ventas con
-                    una estrategia digital diseñada específicamente para tu
-                    negocio.👇🏼
-                </h1>
-            </div>
-            <div
-                style="width:100%;height:100%;overflow:scroll"
-                id="my-cal-inline-30min"
-            >
-            </div>
-            <div>
-                <p class="text-center text-white text-sm md:text-lg mt-4">
-                    <strong class="font-bold text-white italic underline">El problema no es tu presupuesto</strong> Es la estrategia detrás.
-                    Muchas empresas invierten todos los meses en anuncios, pero
-                    <strong class="font-bold text-white italic underline"> sin segmentar, sin propuesta clara y sin medición real.</strong>
-                    Resultado: clics caros y leads que no convierten. <strong class="text-white font-bold italic underline">Nosotros
-                    ayudamos a corregir eso.</strong>
+  <div class="container max-w-4xl mx-auto px-4 py-8 md:py-16">
+    <div class="max-w-6xl mx-auto">
+      <div
+        class="bg-white/5 border mb-3 border-white/10 rounded-2xl p-8 md:p-10 backdrop-blur-sm"
+      >
+        <h2
+          class="text-2xl md:text-3xl font-bold text-center text-white mb-5 leading-tight"
+        >
+          Antes de agendar, <span class="text-winay"
+            >confirma si tu marca califica</span
+          > 👇
+        </h2>
+
+        <ul class="space-y-6 max-w-2xl mx-auto mb-5">
+          {
+            checklistItems.map((item) => (
+              <li class="flex items-start gap-4 group">
+                <div class="shrink-0 w-8 h-8 rounded-full bg-winay/20 flex items-center justify-center mt-0.5  transition-colors duration-300">
+                  <svg
+                    class="w-5 h-5 text-winay group-hover:text-white transition-colors duration-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="3"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <p class="text-white text-xs md:text-xl font-medium">
+                  {item.text}
                 </p>
-            </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="text-center border-t border-white/10 pt-4">
+          <p class="text-gray-300 text-base md:text-xl leading-relaxed">
+            Si cumples con estos puntos, <span class="text-white font-bold"
+              >agenda tu diagnóstico estratégico</span
+            > con nuestro equipo.
+          </p>
         </div>
+      </div>
+
+      <div
+        class="relative w-full rounded-xl overflow-hidden bg-white/5 border border-white/10"
+      >
+        <div
+          id="calendar-loader"
+          class="absolute inset-0 flex flex-col items-center justify-center text-white z-0"
+        >
+          <div
+            class="w-10 h-10 border-4 border-winay/30 border-t-winay rounded-full animate-spin mb-4"
+          >
+          </div>
+          <p class="text-sm text-gray-400 animate-pulse">
+            Cargando disponibilidad...
+          </p>
+        </div>
+
+        <div
+          style="width:100%;height:100%;overflow:scroll;position:relative;z-index:10;"
+          id="my-cal-inline-30min"
+        >
+        </div>
+      </div>
+
+      <div class="flex justify-center mt-4 md:mt-6">
+        <a
+          href="#cal"
+          class="inline-flex flex-col items-center
+                                bg-gradient-to-b from-green-500 via-green-600 to-green-700
+                                hover:from-green-600 hover:via-green-700 hover:to-green-600
+                                text-white text-[12px] md:text-2xl font-semibold py-4 px-4 md:px-10 rounded-full
+                                cursor-pointer transition-all duration-300 uppercase shadow-xl
+                                hover:shadow-2xl transform gap-1 text-center"
+        >
+          <span class="flex items-center gap-2">
+            <svg
+              class="w-7 h-7"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+
+            APLICAR PARA DIAGNÓSTICO ESTRATÉGICO
+          </span>
+
+          <span class="text-[10px] md:text-xs tracking-widest opacity-90">
+            Clic para evaluar si tu marca califica</span
+          >
+        </a>
+      </div>
     </div>
+  </div>
 </section>
-<script type="text/javascript">
+
+<script>
+  // Esta función carga el script de Cal.com
+  function loadCalEmbed() {
+    if (window.Cal) return; // Si ya existe, no hacemos nada
+
     (function (C, A, L) {
-        let p = function (a, ar) {
-            a.q.push(ar);
-        };
-        let d = C.document;
-        C.Cal =
-            C.Cal ||
-            function () {
-                let cal = C.Cal;
-                let ar = arguments;
-                if (!cal.loaded) {
-                    cal.ns = {};
-                    cal.q = cal.q || [];
-                    d.head.appendChild(d.createElement("script")).src = A;
-                    cal.loaded = true;
-                }
-                if (ar[0] === L) {
-                    const api = function () {
-                        p(api, arguments);
-                    };
-                    const namespace = ar[1];
-                    api.q = api.q || [];
-                    if (typeof namespace === "string") {
-                        cal.ns[namespace] = cal.ns[namespace] || api;
-                        p(cal.ns[namespace], ar);
-                        p(cal, ["initNamespace", namespace]);
-                    } else p(cal, ar);
-                    return;
-                }
-                p(cal, ar);
+      let p = function (a, ar) {
+        a.q.push(ar);
+      };
+      let d = C.document;
+      C.Cal =
+        C.Cal ||
+        function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            d.head.appendChild(d.createElement("script")).src = A;
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () {
+              p(api, arguments);
             };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
     })(window, "https://app.cal.com/embed/embed.js", "init");
+
     Cal("init", "30min", { origin: "https://app.cal.com" });
 
     Cal.ns["30min"]("inline", {
-        elementOrSelector: "#my-cal-inline-30min",
-        config: { layout: "month_view" },
-        calLink: "winay-agency/30min",
+      elementOrSelector: "#my-cal-inline-30min",
+      config: { layout: "month_view", defaultPhoneCountry: "pe" },
+      calLink: "winay-agency/30min",
     });
 
     Cal.ns["30min"]("ui", {
-        hideEventTypeDetails: false,
-        layout: "month_view",
+      hideEventTypeDetails: false,
+      layout: "month_view",
     });
+
+    // Ocultamos el loader después de unos segundos para dar tiempo a que renderice
+    setTimeout(() => {
+      const loader = document.getElementById("calendar-loader");
+      if (loader) loader.style.display = "none";
+    }, 2000);
+  }
+
+  // --- LA MAGIA DEL RENDIMIENTO AQUÍ ---
+  // Usamos IntersectionObserver para detectar cuando el usuario ve la sección
+  document.addEventListener("DOMContentLoaded", () => {
+    const calendarSection = document.getElementById("cal");
+
+    if (calendarSection) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // ¡El usuario llegó a la sección! Cargamos el calendario.
+              console.log("Cargando calendario...");
+              loadCalEmbed();
+              // Dejamos de observar para no ejecutarlo dos veces
+              observer.disconnect();
+            }
+          });
+        },
+        {
+          rootMargin: "200px", // Carga el calendario 200px antes de llegar (pre-carga)
+        }
+      );
+
+      observer.observe(calendarSection);
+    }
+  });
 </script>
-<!-- Cal inline embed code ends -->
