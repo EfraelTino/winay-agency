@@ -1,4 +1,12 @@
 # ----------------------------------------------------------------------
+# 0. OPTIMIZACIÓN LITESPEED (NUEVO: Agregado para velocidad extrema)
+# Activa compresión Brotli si el servidor lo soporta
+# ----------------------------------------------------------------------
+<IfModule mod_lite_speed.c>
+  EnableBrotliCompress On
+</IfModule>
+
+# ----------------------------------------------------------------------
 # 1. FORZAR HTTPS (Seguridad y Velocidad HTTP/2)
 # ----------------------------------------------------------------------
 <IfModule mod_rewrite.c>

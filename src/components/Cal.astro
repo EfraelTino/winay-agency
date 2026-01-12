@@ -85,6 +85,7 @@ const checklistItems = [
       <div class="flex justify-center mt-4 md:mt-6">
         <a
           href="#cal"
+          onclick="fbq('track', 'Schedule');"
           class="inline-flex flex-col items-center
                                 bg-gradient-to-b from-green-500 via-green-600 to-green-700
                                 hover:from-green-600 hover:via-green-700 hover:to-green-600
@@ -117,43 +118,36 @@ const checklistItems = [
     </div>
   </div>
 </section>
-
 <script>
-  // Esta función carga el script de Cal.com
+  // 1. Definimos la función de carga (Igual que antes, con el rastreo de Facebook)
   function loadCalEmbed() {
-    if (window.Cal) return; // Si ya existe, no hacemos nada
+    if (window.Cal) return; // Evitar recargas
 
     (function (C, A, L) {
-      let p = function (a, ar) {
-        a.q.push(ar);
-      };
+      let p = function (a, ar) { a.q.push(ar); };
       let d = C.document;
-      C.Cal =
-        C.Cal ||
-        function () {
-          let cal = C.Cal;
-          let ar = arguments;
-          if (!cal.loaded) {
-            cal.ns = {};
-            cal.q = cal.q || [];
-            d.head.appendChild(d.createElement("script")).src = A;
-            cal.loaded = true;
-          }
-          if (ar[0] === L) {
-            const api = function () {
-              p(api, arguments);
-            };
-            const namespace = ar[1];
-            api.q = api.q || [];
-            if (typeof namespace === "string") {
-              cal.ns[namespace] = cal.ns[namespace] || api;
-              p(cal.ns[namespace], ar);
-              p(cal, ["initNamespace", namespace]);
-            } else p(cal, ar);
-            return;
-          }
-          p(cal, ar);
-        };
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
     })(window, "https://app.cal.com/embed/embed.js", "init");
 
     Cal("init", "30min", { origin: "https://app.cal.com" });
@@ -169,37 +163,48 @@ const checklistItems = [
       layout: "month_view",
     });
 
-    // Ocultamos el loader después de unos segundos para dar tiempo a que renderice
+    // Rastreo de Conversión (Lead) cuando se completa la reserva
+    Cal.ns["30min"]("on", {
+      action: "bookingSuccessful",
+      callback: (e) => {
+        if (window.fbq) {
+           window.fbq('track', 'Lead');
+           console.log("¡Cita agendada! Pixel Lead disparado.");
+        }
+      }
+    });
+
+    // Ocultar loader
     setTimeout(() => {
       const loader = document.getElementById("calendar-loader");
       if (loader) loader.style.display = "none";
     }, 2000);
   }
 
-  // --- LA MAGIA DEL RENDIMIENTO AQUÍ ---
-  // Usamos IntersectionObserver para detectar cuando el usuario ve la sección
-  document.addEventListener("DOMContentLoaded", () => {
-    const calendarSection = document.getElementById("cal");
+  // 2. LÓGICA DE CARGA INTELIGENTE (SCROLL O TIEMPO)
+  let calendarLoaded = false;
 
-    if (calendarSection) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              // ¡El usuario llegó a la sección! Cargamos el calendario.
-              console.log("Cargando calendario...");
-              loadCalEmbed();
-              // Dejamos de observar para no ejecutarlo dos veces
-              observer.disconnect();
-            }
-          });
-        },
-        {
-          rootMargin: "200px", // Carga el calendario 200px antes de llegar (pre-carga)
-        }
-      );
+  function initCalendarTrigger() {
+    // Si ya cargó, no hacemos nada
+    if (calendarLoaded) return;
+    
+    calendarLoaded = true;
+    console.log("Iniciando carga del calendario (Usuario activo o Tiempo cumplido)...");
+    loadCalEmbed();
 
-      observer.observe(calendarSection);
-    }
-  });
+    // Limpiamos los eventos para no gastar memoria
+    document.removeEventListener("scroll", initCalendarTrigger);
+    document.removeEventListener("mousemove", initCalendarTrigger);
+    document.removeEventListener("touchstart", initCalendarTrigger);
+  }
+
+  // Opción A: Cargar automáticamente a los 3.5 segundos
+  setTimeout(initCalendarTrigger, 3500);
+
+  // Opción B: Cargar apenas el usuario interactúe (haga scroll o mueva el mouse)
+  // Usamos { passive: true } para no afectar el rendimiento del scroll
+  document.addEventListener("scroll", initCalendarTrigger, { passive: true });
+  document.addEventListener("mousemove", initCalendarTrigger, { passive: true });
+  document.addEventListener("touchstart", initCalendarTrigger, { passive: true });
+
 </script>

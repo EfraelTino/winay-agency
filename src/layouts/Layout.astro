@@ -1,7 +1,7 @@
 ---
 import "@fontsource-variable/mona-sans";
 import { SEO } from "astro-seo";
-
+import '../global.css';
 // 1. SIMPLIFICACIÓN: Ya no pedimos 'title' aquí.
 interface Props {
   description?: string;
@@ -9,13 +9,13 @@ interface Props {
   noIndex?: boolean;
 }
 
-const { 
+const {
   description = "Wiñay Agency: Multiplica tus ventas con estrategias digitales de alto rendimiento. Expertos en publicidad segmentada y conversión de leads.",
-  image = "/favicon.webp", 
+  image = "/favicon.webp",
   noIndex = false,
 } = Astro.props;
 
-// 2. CORRECCIÓN SEO: 
+// 2. CORRECCIÓN SEO:
 // Marca + Palabra Clave Principal + Ubicación
 const siteTitle = "Wiñay Agency | Agencia de Marketing Digital en Lima";
 
@@ -33,18 +33,17 @@ const seoImage = new URL(image, siteURL).href;
 
     <SEO
       title={siteTitle}
-      titleTemplate={null} 
       description={description}
       noindex={noIndex}
       openGraph={{
         basic: {
-          title: siteTitle,   
+          title: siteTitle,
           type: "website",
           image: seoImage,
         },
         image: {
-            alt: "Wiñay Agency - Agencia de Marketing Digital en Lima",
-        }
+          alt: "Wiñay Agency - Agencia de Marketing Digital en Lima",
+        },
       }}
       twitter={{
         card: "summary_large_image",
@@ -52,9 +51,7 @@ const seoImage = new URL(image, siteURL).href;
         image: seoImage,
       }}
       extend={{
-        meta: [
-          { property: "og:image:secure_url", content: seoImage },
-        ],
+        meta: [{ property: "og:image:secure_url", content: seoImage }],
       }}
     />
 
@@ -84,11 +81,46 @@ const seoImage = new URL(image, siteURL).href;
         "areaServed": "Lima, Peru"
       }
     </script>
+    <script is:inline>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f.fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
 
+      fbq("init", "2127568061108681");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=2127568061108681&ev=PageView&noscript=1"
+      /></noscript
+    >
     <slot name="head" />
   </head>
-  
-  <body >
+
+  <body>
     <slot />
   </body>
 </html>
