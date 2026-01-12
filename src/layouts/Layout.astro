@@ -1,7 +1,7 @@
 ---
 import "@fontsource-variable/mona-sans";
 import { SEO } from "astro-seo";
-import '../global.css';
+import "../global.css";
 // 1. SIMPLIFICACIÓN: Ya no pedimos 'title' aquí.
 interface Props {
   description?: string;
@@ -30,7 +30,10 @@ const seoImage = new URL(image, siteURL).href;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png+xml" href="/favicon.webp" />
     <meta name="generator" content={Astro.generator} />
-
+    <meta
+      name="facebook-domain-verification"
+      content="p336usswfm7bncu7yuf0f5rgiy0f5w"
+    />
     <SEO
       title={siteTitle}
       description={description}
